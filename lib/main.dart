@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/expenses_home_screen.dart';
+import 'package:expense_tracker/widget/expenses_home_screen.dart';
 
 void main() {
   runApp(const MyApp());
