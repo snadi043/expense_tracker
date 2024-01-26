@@ -1,6 +1,7 @@
 # expense_tracker
 
-A new Flutter project.
+New Flutter project with high usability of basic concepts like custom widgets(Stateful and Stateless), Styling and Layout widgets(Scaffold, Column, SizedBox etc), Implementing strong typed data structures and Lifting the State up concepts.
+In addition to these this project includes new concepts dealing with Modals, Input forms, Dark Screens and Datepicker.
 
 ## Getting Started
 
