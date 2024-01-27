@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/category_enum.dart';
 import 'package:intl/intl.dart';
 
-var dateFormatter = DateFormat.yMd();
-var dateString = dateFormatter.format(DateTime.now());
-
 class ExpenseItem extends StatelessWidget {
   const ExpenseItem(this.expense, {super.key});
 
   final Expense expense;
   @override
   Widget build(BuildContext context) {
+    var dateFormatter = DateFormat.yMd();
+    var dateString = dateFormatter.format(DateTime.now());
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
