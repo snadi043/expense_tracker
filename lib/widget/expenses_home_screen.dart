@@ -1,6 +1,7 @@
 import 'package:expense_tracker/category_enum.dart';
 import 'package:expense_tracker/widget/expenseList/expense_list.dart';
 import 'package:expense_tracker/model/expense.dart';
+import 'package:expense_tracker/widget/new_expense.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
@@ -36,18 +37,35 @@ class _ExpenseState extends State<Expenses> {
         category: Category.travel),
   ];
 
+  void _openOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const NewExpense(),
+    );
+  }
+
   @override
-  build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Text('Expense Add feature'),
-          const Text('Expense Chart'),
-          Expanded(
-            child: ExpenseList(expenses: _dummyExpense),
+      appBar: AppBar(
+        title: const Text('Expense Tracker'),
+        actions: [
+          IconButton(
+            onPressed: _openOverlay,
+            icon: const Icon(Icons.add),
           ),
         ],
       ),
+      body: Builder(builder: (context) {
+        return Column(
+          children: [
+            const Text('Expense Chart'),
+            Expanded(
+              child: ExpenseList(expenses: _dummyExpense),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
