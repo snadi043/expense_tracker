@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:expense_tracker/category_enum.dart';
 
 final dateForatter = DateFormat.yMd();
 final dateString = dateForatter.format(DateTime.now());
@@ -16,6 +17,7 @@ class _NewExpense extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
+  Category selectedCategory = Category.leisure;
 
   void _selectDatePicker() async {
     final now = DateTime.now();
@@ -84,10 +86,31 @@ class _NewExpense extends State<NewExpense> {
             ],
           ),
           const SizedBox(
-            height: 4,
+            height: 16,
           ),
           Row(
             children: [
+              DropdownButton(
+                  value: selectedCategory,
+                  items: Category.values
+                      .map(
+                        (category) => DropdownMenuItem(
+                          value: category,
+                          child: Text(
+                            category.name.toUpperCase(),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      selectedCategory = value;
+                    });
+                  }),
+              const Spacer(),
               TextButton(
                 onPressed: _cancelExpense,
                 child: const Text('Cancel'),
