@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/widget/expenses_home_screen.dart';
+// import 'package:flutter/services.dart';
 
 var kColorScheme =
     ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 98, 60, 180));
@@ -7,15 +8,14 @@ var kColorScheme =
 var kDarkColorScheme = ColorScheme.fromSeed(
     seedColor: const Color.fromARGB(255, 5, 99, 125),
     brightness: Brightness.dark);
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  build(BuildContext context) {
-    return MaterialApp(
+void main() {
+  // To restrict the app to work only in the portait mode uncomment the lines below including lines 3, 59 and 60 of this page.
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  //     .then((fn) {
+  runApp(
+    MaterialApp(
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: kDarkColorScheme,
         cardTheme: const CardTheme().copyWith(
@@ -45,13 +45,16 @@ class MyApp extends StatelessWidget {
           ),
         ),
         textTheme: ThemeData().textTheme.copyWith(
-                titleLarge: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 17,
-              color: kColorScheme.onSecondaryContainer,
-            )),
+              titleLarge: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: kColorScheme.onSecondaryContainer,
+              ),
+            ),
       ),
       home: const Expenses(),
-    );
-  }
+    ),
+  );
 }
+//   );
+// }
