@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:expense_tracker/model/expense.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:expense_tracker/category_enum.dart';
@@ -33,27 +36,50 @@ class _NewExpense extends State<NewExpense> {
     });
   }
 
+  void showAlertDialog() {
+    if (Platform.isIOS) {
+      showCupertinoDialog(
+        context: context,
+        builder: (ctx) => CupertinoAlertDialog(
+            title: const Text('Invalid Input'),
+            content: const Text(
+                'Please enter a valid Title, Amount, Date and Category.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
+                child: const Text('Okay'),
+              )
+            ]),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Invalid Input'),
+          content: const Text(
+              'Please enter a valid Title, Amount, Date and Category.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: const Text('Okay'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   _submitExpense() {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountisInvalid = enteredAmount == null || enteredAmount < 0;
     if (_titleController.text.trim().isEmpty ||
         amountisInvalid ||
         _selectedDate == null) {
-      showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-                title: const Text('Invalid Input'),
-                content: const Text(
-                    'Please enter a valid Title, Amount, Date and Category.'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(ctx);
-                    },
-                    child: const Text('Okay'),
-                  ),
-                ],
-              ));
+      showAlertDialog();
       return;
     }
 
